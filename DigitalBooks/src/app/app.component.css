@@ -1,0 +1,21 @@
+.navbar-custom {
+    background-color:darkgreen;
+    font-family: "Consolas", "Lucida Console", monospace;
+}
+/* Modify brand and text color */
+ 
+.navbar-custom .navbar-brand{
+    font-size: 28px;
+    color: lightseagreen;
+    font-weight: 600;
+}
+
+.navbar-custom .navbar-menu-item {
+    color: lightseagreen;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.nav-link > ul > li:hover > a, .main-nav > ul > li[class*="current-menu-"] > a {
+    font-weight: 500;
+}
