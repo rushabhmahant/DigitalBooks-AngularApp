@@ -8,7 +8,7 @@ import { Book } from './book';
 })
 export class BookService {
 
-  private baseUrl = "http://localhost:9191/userservice"
+  private baseUrl = "http://localhost:9191/bookservice"
 
   constructor(private httpClient: HttpClient) { }
 

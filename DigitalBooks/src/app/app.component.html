@@ -5,10 +5,13 @@
             <a class="navbar-brand" href="#!">Digital Bookstore</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item navbar-menu-item"><a routerLink="getOrders" routerLinkActive="active" class="nav-link">Home</a></li>
-                    <li class="nav-item navbar-menu-item"><a routerLink="getOrders" routerLinkActive="active" class="nav-link">Login</a></li>
+                    <!-- <li class="nav-item navbar-menu-item"><a routerLink="home" routerLinkActive="active" class="nav-link">Home</a></li>
+                    <li class="nav-item navbar-menu-item"><a routerLink="login" routerLinkActive="active" class="nav-link">Login</a></li>
                     <li class="nav-item navbar-menu-item"><a routerLink="getOrders" routerLinkActive="active" class="nav-link">Signup</a></li>
-                    <li class="nav-item navbar-menu-item"><a routerLink="getOrders" routerLinkActive="active" class="nav-link">Contact</a></li>
+                    <li class="nav-item navbar-menu-item"><a routerLink="getOrders" routerLinkActive="active" class="nav-link">Contact</a></li> -->
+                    <li class="nav-item navbar-menu-item"><button mat-raised-button color="primary" (click)="goToHomePage()">Home</button></li>&nbsp;
+                    <li class="nav-item navbar-menu-item"><button mat-raised-button color="primary" (click)="openLoginDialog()">Login</button></li>&nbsp;
+                    <li class="nav-item navbar-menu-item"><button mat-raised-button color="primary" (click)="openSignupDialog()">Signup</button></li>&nbsp;
                 </ul>
             </div>
         </div>
