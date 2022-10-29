@@ -1,16 +1,38 @@
-<div class="container">
-<div class="col mb-5">
+<div class="container px-4 px-lg-5">
+    <!-- Heading Row-->
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="assets/books1.jfif" alt="..." /></div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">Business Name or Tagline</h1>
+            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+            <a class="btn btn-primary" href="#!">Call to Action!</a>
+        </div>
+    </div>
+    <!-- Call to Action-->
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
+    </div>
+    
+
+<div class="container" style="text-align: left;"> <p style="font-size: x-large;" class="font-weight-light">Explore the most popular list of available books:</p></div>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">    
+
+
+    <div class="col mb-5" *ngFor="let book of books">
     <div class="card h-100">
-        <!-- Sale badge-->
-        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-        <!-- Product image-->
-        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-        <!-- Product details-->
+        <!-- Blocked Status badge-->
+        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" *ngIf="book.bookBlockedStatus=='B'">Blocked</div>
+        <!-- Book image-->
+        <img class="card-img-top" src="assets/bookstore.png" alt="..." />
+        <!-- Book details-->
         <div class="card-body p-4">
             <div class="text-center">
-                <!-- Product name-->
-                <h5 class="fw-bolder">Special Item</h5>
-                <!-- Product reviews-->
+                <!-- Book name-->
+                <h5 class="fw-bolder">{{book.bookTitle}}</h5>
+                <!-- Book reviews-->
                 <div class="d-flex justify-content-center small text-warning mb-2">
                     <div class="bi-star-fill"></div>
                     <div class="bi-star-fill"></div>
@@ -18,9 +40,9 @@
                     <div class="bi-star-fill"></div>
                     <div class="bi-star-fill"></div>
                 </div>
-                <!-- Product price-->
-                <span class="text-muted text-decoration-line-through">$20.00</span>
-                $18.00
+                <!-- Book price-->
+                <!-- <span class="text-muted text-decoration-line-through">$20.00</span> -->
+                {{book.bookPrice}}
             </div>
         </div>
         <!-- Product actions-->
@@ -29,4 +51,8 @@
         </div>
     </div>
 </div>
+</div>
+
+</div>
+</section>
 </div>
