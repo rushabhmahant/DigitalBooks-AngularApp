@@ -22,6 +22,9 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReaderComponent } from './reader/reader.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { AuthorComponent } from './author/author.component';
+
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import { ReaderComponent } from './reader/reader.component';
     AppComponent,
     HomeComponent,
     LoginDialogComponent,
-    ReaderComponent
+    ReaderComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,8 @@ import { ReaderComponent } from './reader/reader.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

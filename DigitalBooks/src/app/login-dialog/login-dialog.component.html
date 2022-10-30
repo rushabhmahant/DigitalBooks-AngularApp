@@ -16,7 +16,7 @@
 </form>
 
     <div mat-dialog-action [align]="'end'">
-        <button mat-raised-button color="warn" mat-dialog-close>Exit</button>
+        <button mat-raised-button color="warn" mat-dialog-close (click)="exit()">Exit</button>
         <button style="margin-left: 10px;" mat-raised-button color="primary" (click)="login()" mat-dialog-close>Login</button>
     </div>
 

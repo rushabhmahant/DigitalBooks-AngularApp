@@ -1,3 +1,106 @@
+
 <div class="container px-4 px-lg-5">
+    <section>
+        <br/>
+        <div class="container" style="text-align: center;"><h1>Welcome to Bookstore User !!</h1></div>
+    </section>
+
+    <h2>Search Books:</h2>
+    <mat-grid-list cols="4" rowHeight="150px">
+        
+    <mat-grid-tile [colspan]="3">
+    <form [formGroup]="searchForm">
+    <mat-form-field>
+        <input type="text" formControlName="title" matInput [(ngModel)]= "titleSearch"
+        (keyup)="search()" placeholder="Title...">
+        <!-- <button matSuffix mat-button><mat-icon >search</mat-icon></button> -->
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <input type="text" formControlName="category" matInput [(ngModel)]= "categorySearch"
+        (keyup)="search()" placeholder="Category...">
+        <!-- <button matSuffix mat-button><mat-icon >search</mat-icon></button> -->
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <input type="text" formControlName="author" matInput [(ngModel)]= "authorSearch"
+        (keyup)="search()" placeholder="Author...">
+        <!-- <button matSuffix mat-button><mat-icon >search</mat-icon></button> -->
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <input type="text" formControlName="price" matInput [(ngModel)]= "priceSearch"
+        (keyup)="search()" placeholder="Price...">
+        <!-- <button matSuffix mat-button><mat-icon >search</mat-icon></button> -->
+    </mat-form-field>
+    &nbsp;
     
+    </form>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+                <button mat-raised-button class="reader-buttons">Read a Book</button><br/>
+                <button mat-raised-button class="reader-buttons">My Subscriptions</button>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+    
+    
+    <!-- <mat-grid-list cols="4" rowHeight="2:2">
+        <mat-grid-tile>1</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-tile>1</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-tile>1</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+      </mat-grid-list> -->
+
+      
+
+      <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">    
+    
+    
+        <div class="col mb-5" *ngFor="let book of books">
+        <div class="card h-100">
+            <!-- Blocked Status badge-->
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" *ngIf="book.bookBlockedStatus=='B'">Blocked</div>
+            <!-- Book image-->
+            <img class="card-img-top" src="assets/bookstore.png" alt="..." />
+            <!-- Book details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Book name-->
+                    <h5 class="fw-bolder">{{book.bookTitle}}</h5>
+                    <!-- Book reviews-->
+                    <div class="d-flex justify-content-center small text-warning mb-2">
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                    </div>
+                    <!-- Book price-->
+                    <!-- <span class="text-muted text-decoration-line-through">$20.00</span> -->
+                    <span> <b>{{book.bookPrice | currency : '&#8377;' }}</b> </span>
+                </div>
+            </div>
+            <!-- Book actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Subscribe</a></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    </div>
+    </section>
+
 </div>

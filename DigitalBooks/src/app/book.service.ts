@@ -21,11 +21,28 @@ export class BookService {
   }
 
   searchBook(bookTitle: string, bookCategory: string, bookAuthor: string, bookPrice: number): Observable<Book[]>{
+    console.log("Title: "+bookTitle);
+    console.log("Cateogory: "+bookCategory);
+    console.log("Author: "+bookAuthor);
+    console.log("Price: "+bookPrice);
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("title",bookTitle);
-    queryParams = queryParams.append("category",bookCategory);
-    queryParams = queryParams.append("author",bookAuthor);
+    if(bookTitle != undefined && bookTitle != ""){
+      queryParams = queryParams.append("title",bookTitle);
+    }
+    if(bookCategory != undefined && bookCategory != ""){
+      queryParams = queryParams.append("category",bookCategory);
+    }
+    if(bookAuthor != undefined && bookAuthor != ""){
+      queryParams = queryParams.append("author",bookAuthor);
+    }
+    if(bookPrice == undefined){
+      queryParams = queryParams.append("price","");
+      console.log("(If)Searching for title: "+bookTitle+", category: "+bookCategory+", author: "+bookAuthor+", price: "+bookPrice);
+    }
+    else{
     queryParams = queryParams.append("price",bookPrice);
+    console.log("(Else)Searching for title: "+bookTitle+", category: "+bookCategory+", author: "+bookAuthor+", price: "+bookPrice);
+    }
     return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/search", {params: queryParams});
   }
 
