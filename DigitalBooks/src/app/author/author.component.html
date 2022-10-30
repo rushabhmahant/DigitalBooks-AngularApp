@@ -1,23 +1,70 @@
 <div class="container px-4 px-lg-5">
     <section>
         <br/>
-        <div class="container" style="text-align: center;"><h1 class="font-weight-light">Welcome to Bookstore Author !!</h1></div>
+        <div class="container" style="text-align: center;"><p style="color:blueviolet;font-size:30px;">Welcome to Bookstore Author !!</p></div>
     </section>
-    <!-- <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-list gutterSize="50px" cols="4" rowHeight="1:1">
       <mat-grid-tile>
-        <div class="col-lg-25"><img class="img-fluid rounded mb-4 mb-lg-10" src="assets/author1.jpg" alt="..." /></div>
+        <div class="col-lg-100"><img class="img-fluid rounded mb-4 mb-lg-10" src="assets/author1.jpg" alt="..." /></div>
       </mat-grid-tile>
-      <mat-grid-tile  [colspan]="2">
-        <div class="col-lg-5">
-            <h1 class="font-weight-light">An Author is the first step to knowledge</h1>
-            <p>An author is a person who writes books, stories, poems, or other written work. Their writing can be truth or fiction, short or long. Often, author is a word for a professional writer, but any person who writes may also be called that.
-
-                Sometimes, a person who creates something that is not prose is called an author. Someone who writes music may be called the author of that piece of music, though we would usually call that person a composer. In the film world, the French word for author, auteur, is often used about someone who has been both the writer and director of a movie.
-                
-                In biology, the first person to write an article that gives a name to and describes a type of living thing is the author of that name.
-                
-                In copyright law, the author is the first owner of copyright.[1] Such laws also apply to other works of art such as pictures or music</p>
+      <mat-grid-tile mat-grid-tile-header="Check"  [colspan]="3">
+        <!-- <div class="col-lg-5"> -->
+            <!-- <p>An Author is the first step to knowledge</p> -->
+            <p>An author is a person who writes books, stories, poems, or other written work. Their writing can be truth or fiction, short or long. Often, author is a word for a professional writer, but any person who writes may also be called that.Sometimes, a person who creates something that is not prose is called an author. Someone who writes music may be called the author of that piece of music, though we would usually call that person a composer.
+               </p>
+        <!-- </div> -->
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div style="text-align: center;"><p style="color:blueviolet;font-size:25px;">Explore books created by awesome authors like you !</p></div>
+    
+    <section class="py-5">
+        <div style="text-align: center;"><button mat-raised-button color="primary">Add Book</button></div>
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">    
+    
+    
+        <div class="col mb-5" *ngFor="let book of books">
+        <div class="card h-100">
+            <!-- Blocked Status badge-->
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" *ngIf="book.bookBlockedStatus=='B'">Blocked</div>
+            <!-- Book image-->
+            <img class="card-img-top" src="assets/bookstore.png" alt="..." />
+            <!-- Book details-->
+            <div class="card-body p-4">
+                <div class="text-center">
+                    <!-- Book name-->
+                    <h5 class="fw-bolder">{{book.bookTitle}}</h5>
+                    <!-- Book reviews-->
+                    <div class="d-flex justify-content-center small text-warning mb-2">
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                    </div>
+                    <!-- Book price-->
+                    <!-- <span class="text-muted text-decoration-line-through">$20.00</span> -->
+                    <!-- <span> <b>{{book.bookPrice | currency : '&#8377;' }}</b> </span> -->
+                </div>
+            </div>
+            <!-- Book actions-->
+            <div class="card-footer p-10 pt-0 border-top-0 bg-transparent">
+                <!-- <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Subscribe</a></div> -->
+                <div class="text-center"><button mat-raised-button color="primary" (click)="updateBook(book)">Update</button><span id="nbsp">&nbsp;</span>
+                <button mat-raised-button color="accent" (click)="unblockBook(book)" *ngIf="book.bookBlockedStatus=='B'">Unblock</button>
+                <button mat-raised-button color="accent" (click)="blockBook(book)" *ngIf="book.bookBlockedStatus=='U'">Block</button>
+                </div>
+                <div style="line-height:50%;">
+                    <br>
+                </div>
+                <div class="text-center"><button mat-raised-button color="warn">Delete</button></div>
+            </div>
         </div>
-      </mat-grid-tile>
-    </mat-grid-list> -->
+    </div>
+    </div>
+    
+    </div>
+    </section>
+
+
 </div>
