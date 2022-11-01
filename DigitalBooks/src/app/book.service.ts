@@ -13,7 +13,8 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   getAllBooks(): Observable<Book[]>{
-    return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/books");
+    // return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/books");
+    return this.httpClient.get<Book[]>("http://localhost:7001/api/v1/digitalbooks/userservice/author/getAllBooks");
   }
 
   getBookById(bookId: number): Observable<Book>{

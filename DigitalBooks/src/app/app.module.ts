@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,10 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReaderComponent } from './reader/reader.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
 import { AuthorComponent } from './author/author.component';
+import { HttpInterceptorService } from './http-interceptor.service';
+import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subscriptions.component';
 
 
 
@@ -33,7 +36,8 @@ import { AuthorComponent } from './author/author.component';
     HomeComponent,
     LoginDialogComponent,
     ReaderComponent,
-    AuthorComponent
+    AuthorComponent,
+    ReaderSubscriptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +56,12 @@ import { AuthorComponent } from './author/author.component';
     MatNativeDateModule,
     MatRadioModule,
     ReactiveFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

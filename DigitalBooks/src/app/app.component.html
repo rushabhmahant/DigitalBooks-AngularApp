@@ -12,6 +12,7 @@
                     <li class="nav-item navbar-menu-item"><button mat-raised-button color="primary" (click)="goToHomePage()">Home</button></li>&nbsp;
                     <li class="nav-item navbar-menu-item"><button *ngIf="showLoginButton" mat-raised-button color="primary" (click)="openLoginDialog()">Login</button></li>&nbsp;
                     <li class="nav-item navbar-menu-item"><button *ngIf="showSignupButton" mat-raised-button color="primary" (click)="openSignupDialog()">Signup</button></li>&nbsp;
+                    <li class="nav-item navbar-menu-item"><button *ngIf="showLogoutButton" mat-raised-button color="warn" (click)="logout()">Logout</button></li>&nbsp;
                 </ul>
             </div>
         </div>

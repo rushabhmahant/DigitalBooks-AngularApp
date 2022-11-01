@@ -6,5 +6,13 @@ export class User {
 	userFirstName!: string;
 	userLastName!: string;
     userRoles!: object[];
+	
+	enabled!: boolean;
+	password!: string;
+	authorities!: object[];
+	accountNonExpired!: boolean;
+	credentialsNonExpired!: boolean;
+	accountNonLocked!: boolean
+
 
 }

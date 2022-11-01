@@ -39,8 +39,8 @@
         </mat-grid-tile>
 
         <mat-grid-tile>
-                <button mat-raised-button class="reader-buttons">Read a Book</button><br/>
-                <button mat-raised-button class="reader-buttons">My Subscriptions</button>
+                <button mat-raised-button class="reader-buttons" (click)="userSubscribedBooks()">Read a Book</button><br/>
+                <button mat-raised-button class="reader-buttons" (click)="userSubscriptions()">My Subscriptions</button>
         </mat-grid-tile>
 
     </mat-grid-list>

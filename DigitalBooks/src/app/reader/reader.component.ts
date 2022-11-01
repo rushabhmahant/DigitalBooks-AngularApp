@@ -21,11 +21,17 @@ export class ReaderComponent implements OnInit {
   priceSearch!: number;
 
   constructor(private formBuilder: FormBuilder,
-    private bookService: BookService, private router: Router, private appComponent: AppComponent) { }
+    private bookService: BookService, private router: Router, private appComponent: AppComponent) {
+      console.log("Inside reader component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+     }
 
   ngOnInit(): void {
 
-    console.log("Calling reader ngOnInit()");
+    
 
     this.searchForm = this.formBuilder.group({
       title:[''],
@@ -59,7 +65,7 @@ export class ReaderComponent implements OnInit {
   }
 
   userSubscriptions(){
-    //  Navigate to list of user subscriptions
+    this.router.navigate(['reader-subscriptions']);
   }
 
   @HostListener('window:popstate', ['$event'])
