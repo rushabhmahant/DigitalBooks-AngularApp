@@ -1,6 +1,6 @@
 
 <div style="margin-top: 20px;margin-bottom: 20px;">
-    <h2 class="text-center" style="color: black;">Checkout your subscriptions:</h2>
+    <h2 class="text-center" style="color: black;">Checkout your subscriptions {{user.userFirstName}}:</h2>
     <div class="container">
        <h5 *ngIf="userSubscriptions.length==0" style="color: red">Sorry, {{user.userFirstName}}, you have no orders!</h5>
     <table class="table table-striped">

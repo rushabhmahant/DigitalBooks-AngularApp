@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../book.service';
 import { Subscription } from '../subscription';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -14,9 +15,8 @@ export class ReaderSubscriptionsComponent implements OnInit {
   user!: User;
   userSubscriptions!: Subscription[];
   userSubscriptionsTemplate!: UserSubscriptionsTemplate;
-  
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private bookService: BookService) { }
 
   ngOnInit(): void {
 
@@ -24,6 +24,7 @@ export class ReaderSubscriptionsComponent implements OnInit {
     this.userService.getUserSubscriptions(this.userId).subscribe(
       data => {
         this.userSubscriptionsTemplate = data;
+        this.user = this.userSubscriptionsTemplate.user;
         this.userSubscriptions = this.userSubscriptionsTemplate.userSubscriptions;
       },
       error => console.log(error)
@@ -35,7 +36,7 @@ export class ReaderSubscriptionsComponent implements OnInit {
   }
 
   cancelSubscription(){
-    
+
   }
 
 
