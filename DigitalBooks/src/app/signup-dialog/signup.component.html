@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Signup</h1>
+<div mat-dialog-content>
+<form [formGroup]="signupForm">
+    <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input formControlName="firstname" matInput placeholder="Enter first name...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastname" matInput placeholder="Enter last name...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input formControlName="username" matInput placeholder="Enter username">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Enter pasword">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input formControlName="confirmpassword" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Enter pasword">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+    </mat-form-field>
+
+    <h4>Select Account type:</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Account type</mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="reader">Reader</mat-option>
+            <mat-option value="author">Author</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+</form>
+
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close (click)="signup()">Signup</button>
+        <button style="margin-left: 10px;" mat-raised-button color="warn" (click)="exit()" mat-dialog-close>Exit</button>
+    </div>
+
+</div>

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtUtilService } from './jwt-util.service';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { SignupComponent } from './signup-dialog/signup.component';
 import { User } from './user';
 
 @Component({
@@ -56,6 +57,17 @@ export class AppComponent {
 
   openSignupDialog(){
 
+    const signupDialogConfig = new MatDialogConfig();
+    signupDialogConfig.autoFocus = true;
+
+    const signupDialogRef = this.matDialog.open(SignupComponent, signupDialogConfig);
+
+    signupDialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // this.showLoginButton = result;
+      // this.showSignupButton = result;
+    });
+  
   }
 
   setCurrentUser(user: User){

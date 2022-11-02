@@ -23,6 +23,10 @@ export class UserService {
     return this.httpClient.get<User>("http://localhost:9191/userservice/user/" + userId);
   }
 
+  signup(user: User, roleId: number): Observable<User>{
+    return this.httpClient.post<User>("http://localhost:7001/userservice/signup/" + roleId, user)
+  }
+
   //  Reader APIs
 
   getUserSubscriptions(userId: number): Observable<UserSubscriptionsTemplate>{

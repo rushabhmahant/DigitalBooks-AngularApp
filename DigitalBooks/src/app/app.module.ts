@@ -27,6 +27,7 @@ import {MatListModule} from '@angular/material/list';
 import { AuthorComponent } from './author/author.component';
 import { HttpInterceptorService } from './http-interceptor.service';
 import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subscriptions.component';
+import { SignupComponent } from './signup-dialog/signup.component';
 
 
 
@@ -37,7 +38,8 @@ import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subs
     LoginDialogComponent,
     ReaderComponent,
     AuthorComponent,
-    ReaderSubscriptionsComponent
+    ReaderSubscriptionsComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

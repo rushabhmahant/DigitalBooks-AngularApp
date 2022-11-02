@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { UserService } from '../user.service';
@@ -13,7 +14,14 @@ export class AuthorComponent implements OnInit {
   books!: Book[];
   userId!: number;
 
-  constructor(private userService: UserService, private bookService: BookService) { }
+  constructor(private userService: UserService, private bookService: BookService,
+    private appComponent: AppComponent) {
+    console.log("Inside author component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+   }
 
   ngOnInit(): void {
 
