@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from './book';
+import { Subscription } from './subscription';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,13 @@ export class BookService {
   //  Here, userId is the same as authorId in mS
   deleteBook(userId: number, bookId: Book): Observable<any>{
     return this.httpClient.delete("http://localhost:7002/bookservice/author/delete/" + userId +"/" +bookId);
+  }
+
+
+  //  Subscription services
+
+  addSubscription(userId: number, bookId: number): Observable<Subscription>{
+    return this.httpClient.post<Subscription>("http://localhost:7001/userservice/readers/" + userId + "/subscribe/" + bookId, {});
   }
 
 

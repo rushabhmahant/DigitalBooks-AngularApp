@@ -5,6 +5,8 @@ import { BookService } from '../book.service';
 import { HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { UserService } from '../user.service';
+import { Subscription } from '../subscription';
 
 @Component({
   selector: 'app-reader',
@@ -14,13 +16,15 @@ import { AppComponent } from '../app.component';
 export class ReaderComponent implements OnInit {
 
   searchForm!: FormGroup;
+  userId!: number;  // crrent user
   books!: Book[];
+  _userSubscribedBooks: number[] = [];
   titleSearch!: string;
   categorySearch!: string;
   authorSearch!: string;
   priceSearch!: number;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder, private userService: UserService,
     private bookService: BookService, private router: Router, private appComponent: AppComponent) {
       console.log("Inside reader component constructor");
     this.appComponent.showHomeBtn(true);
@@ -31,7 +35,7 @@ export class ReaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+    this.userId = Number(sessionStorage.getItem('userId'));
 
     this.searchForm = this.formBuilder.group({
       title:[''],
@@ -45,6 +49,26 @@ export class ReaderComponent implements OnInit {
       error => console.log("Error while fetching books for reader: " + error)
     );
 
+    this.loadUserSubscriptions();
+
+  }
+
+  loadUserSubscriptions(){
+    this.userService.getUserSubscriptions(this.userId).subscribe(
+      data => {
+        console.log(data);
+        console.log(data.userSubscriptions);
+        for(var subscription of data.userSubscriptions){
+          console.log("Inside for");
+          console.log(subscription);
+          this._userSubscribedBooks.push(subscription.bookId);
+        }
+      },
+      error => {
+        console.log("Error occurred while subscribing book")
+        console.log(error);
+      }
+    );
   }
 
   search(){
@@ -57,6 +81,40 @@ export class ReaderComponent implements OnInit {
       },
       error => console.log("Error while searching books: " + error)
     );
+
+  }
+
+  addSubscription(book: Book) {
+    console.log("Loading subscriptions..");
+    this.loadUserSubscriptions();
+    console.log("Subscriptions loaded");
+    console.log(this._userSubscribedBooks);
+    var subscribedBookFlag: boolean = false;
+    for(var i=0; i<this._userSubscribedBooks.length;i++){
+      console.log(this._userSubscribedBooks);
+      if(this._userSubscribedBooks[i] == book.bookId){
+        //  Also Check if user cancels the subscription at a later point of time after subscribing it
+        console.log("Already subscribed...");
+        subscribedBookFlag = true;
+        alert("You have already subscribed to this book !");
+        break;
+      }
+      
+    }
+
+    if(!subscribedBookFlag){
+      this.userService.addSubscription(this.userId, book.bookId).subscribe(
+        data => {
+          console.log("Adding subscription...");
+          alert("Subscription added successfully. \nSubscription Id: " 
+            + data.subscriptionId + " \nSubscription Price: " + data.subscriptionPrice);
+          this._userSubscribedBooks.push(data.bookId);
+        },
+        error => {
+          console.log(error)
+        }
+      );
+    }
 
   }
 

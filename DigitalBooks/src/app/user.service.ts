@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from './book';
 import { UserSubscriptionsTemplate } from './reader-subscriptions/reader-subscriptions.component';
+import { Subscription } from './subscription';
 import { User } from './user';
 
 @Injectable({
@@ -26,6 +27,10 @@ export class UserService {
 
   getUserSubscriptions(userId: number): Observable<UserSubscriptionsTemplate>{
     return this.httpClient.get<UserSubscriptionsTemplate>("http://localhost:7001/api/v1/digitalbooks/userservice/readers/"+userId+"/subscriptions");
+  }
+
+  addSubscription(userId: number, bookId: number): Observable<Subscription>{
+    return this.httpClient.post<Subscription>("http://localhost:7001/api/v1/digitalbooks/userservice/readers/" + userId + "/subscribe/" + bookId, {});
   }
 
   //  Author APIs

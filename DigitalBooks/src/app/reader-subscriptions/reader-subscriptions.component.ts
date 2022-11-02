@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Subscription } from '../subscription';
 import { User } from '../user';
@@ -13,6 +14,7 @@ export class ReaderSubscriptionsComponent implements OnInit {
 
   userId!: number;
   user!: User;
+  userDisplayName!: string;
   userSubscriptions!: Subscription[];
   userSubscriptionsTemplate!: UserSubscriptionsTemplate;
 
@@ -21,10 +23,13 @@ export class ReaderSubscriptionsComponent implements OnInit {
   ngOnInit(): void {
 
     this.userId = Number(sessionStorage.getItem('userId'));
+    
     this.userService.getUserSubscriptions(this.userId).subscribe(
       data => {
         this.userSubscriptionsTemplate = data;
         this.user = this.userSubscriptionsTemplate.user;
+        this.userDisplayName = this.userSubscriptionsTemplate.user.userFirstName.charAt(0).toUpperCase() 
+          + this.userSubscriptionsTemplate.user.userFirstName.slice(1).toLowerCase();
         this.userSubscriptions = this.userSubscriptionsTemplate.userSubscriptions;
       },
       error => console.log(error)
@@ -35,7 +40,7 @@ export class ReaderSubscriptionsComponent implements OnInit {
 
   }
 
-  cancelSubscription(){
+  cancelSubscription(subscriptionId: number){
 
   }
 
