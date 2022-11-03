@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Create a Book</h1>
 <div mat-dialog-content>
-<form [formGroup]="bookForm">
+<form class="example-form" [formGroup]="bookForm">
     <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input formControlName="title" matInput placeholder="Enter title...">
@@ -18,11 +18,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-label>Content</mat-label>
-        <input formControlName="content" matInput placeholder="Enter content...">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
         <mat-label>Publisher</mat-label>
         <input formControlName="publisher" matInput placeholder="Enter publisher...">
     </mat-form-field>
@@ -35,6 +30,8 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!-- Upload logo section -->
+    <mat-form-field appearance="outline">
     <div class="container row">
         <div class="col-md-12">
             <h3>Upload Image</h3>
@@ -46,9 +43,33 @@
             <input type="file" (change)="onFileChanged($event)">
         </div>
         <div class="col-md-6">
-            <input type="button" (click)="onUpload" value="upload">
+            <input type="button" (click)="onUpload()" value="upload">
         </div>
     </div>
+    <hr/>
+
+    <div class="container row">
+        <div class="col-md-12">
+            <div *ngIf="message">{{message}}</div>
+        </div>
+    </div>
+</mat-form-field>
+
+    <!-- Below is for retrieving image from backend-->
+    <div class="container row">
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imagename">
+        </div>
+        <div class="col-md-6">
+            <input type="button" (click)="getImage()" value="Get Image">
+        </div>
+    </div>
+    <div class="container row">
+        <div class="col-md-12">
+            <img [src]="retrievedImage">
+        </div>
+    </div>
+    <!-- Till here -->
 
     <!-- <h4>Select Account type:</h4>
     <mat-form-field appearance="fill">
@@ -58,6 +79,13 @@
             <mat-option value="author">Author</mat-option>
         </mat-select>
     </mat-form-field> -->
+
+    
+
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Content</mat-label>
+        <textarea formControlName="content" matInput placeholder="Enter content..."></textarea>
+    </mat-form-field>
 
 </form>
 

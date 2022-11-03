@@ -21,6 +21,11 @@ export class AuthorAddbookComponent implements OnInit {
   content!: string;
   publisher!: string;
   publishedDate!: Date;
+  selectedFile!: File;
+
+  retrievedImage!: any;
+  message!: string;
+  imagename!: string;
 
 
   constructor(private formBuilder: FormBuilder) { }
@@ -37,7 +42,23 @@ export class AuthorAddbookComponent implements OnInit {
   }
 
   goBack(){
+
+  }
+
+  onFileChanged(event: any){
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload(){
+    console.log(this.selectedFile);
     
+    const uploadImageData = new FormData;
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+  }
+
+  getImage(){
+
   }
 
 }
