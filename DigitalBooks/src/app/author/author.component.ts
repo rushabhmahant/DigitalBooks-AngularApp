@@ -42,6 +42,7 @@ export class AuthorComponent implements OnInit {
     if(confirm("Are you sure?")){
     this.userService.setBookBlockedStatus(Number(sessionStorage.getItem('userId')), book.bookId, "yes", book).subscribe(
       data => {
+      alert("Book blocked successfully !")
       this.getAllAvailableBooks();
     },
       error => {alert("Error while blocking book");

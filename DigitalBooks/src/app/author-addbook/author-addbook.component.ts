@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-author-addbook',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorAddbookComponent implements OnInit {
 
-  constructor() { }
+  checkoutForm!: FormGroup
+  //  Form values
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.checkoutForm = this.formBuilder.group({
+      username:['',Validators.required],
+      password:['',Validators.required]
+    });
+  
   }
 
 }

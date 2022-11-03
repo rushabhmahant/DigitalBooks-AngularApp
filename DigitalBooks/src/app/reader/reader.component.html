@@ -95,7 +95,8 @@
             <!-- Book actions-->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
-                    <a class="btn btn-outline-dark mt-auto" (click)="addSubscription(book)" target="_blank">Subscribe</a>
+                    <!-- <a class="btn btn-outline-dark mt-auto" (click)="addSubscription(book)" target="_blank">Subscribe</a> -->
+                    <button class="btn btn-outline-dark mt-auto" [disabled]="book.bookBlockedStatus=='B'" (click)="addSubscription(book)">Subscribe</button>
                 </div>
             </div>
         </div>

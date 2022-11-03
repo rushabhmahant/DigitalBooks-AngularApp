@@ -36,6 +36,7 @@ export class UserService {
   addSubscription(userId: number, bookId: number): Observable<Subscription>{
     return this.httpClient.post<Subscription>("http://localhost:7001/api/v1/digitalbooks/userservice/readers/" + userId + "/subscribe/" + bookId, {});
   }
+  
 
   //  Author APIs
 
