@@ -28,6 +28,8 @@ import { AuthorComponent } from './author/author.component';
 import { HttpInterceptorService } from './http-interceptor.service';
 import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subscriptions.component';
 import { SignupComponent } from './signup-dialog/signup.component';
+import { ReaderReadbookComponent } from './reader-readbook/reader-readbook.component';
+import { AuthorAddbookComponent } from './author-addbook/author-addbook.component';
 
 
 
@@ -39,7 +41,9 @@ import { SignupComponent } from './signup-dialog/signup.component';
     ReaderComponent,
     AuthorComponent,
     ReaderSubscriptionsComponent,
-    SignupComponent
+    SignupComponent,
+    ReaderReadbookComponent,
+    AuthorAddbookComponent
   ],
   imports: [
     BrowserModule,

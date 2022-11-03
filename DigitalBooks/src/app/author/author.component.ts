@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
@@ -15,7 +16,7 @@ export class AuthorComponent implements OnInit {
   userId!: number;
 
   constructor(private userService: UserService, private bookService: BookService,
-    private appComponent: AppComponent) {
+    private appComponent: AppComponent, private router: Router) {
     console.log("Inside author component constructor");
     this.appComponent.showHomeBtn(true);
     this.appComponent.showLoginBtn(false);
@@ -27,6 +28,10 @@ export class AuthorComponent implements OnInit {
 
     this.getAllAvailableBooks();
 
+  }
+
+  addBook(){
+    this.router.navigate(['author-addbook']);
   }
 
   updateBook(book: Book){

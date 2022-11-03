@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Subscription } from '../subscription';
@@ -18,7 +19,8 @@ export class ReaderSubscriptionsComponent implements OnInit {
   userSubscriptions!: Subscription[];
   userSubscriptionsTemplate!: UserSubscriptionsTemplate;
 
-  constructor(private userService: UserService, private bookService: BookService) { }
+  constructor(private userService: UserService, private bookService: BookService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -36,8 +38,8 @@ export class ReaderSubscriptionsComponent implements OnInit {
     );
   }
 
-  readBook(){
-
+  readBook(bookId: number){
+    this.router.navigate(['reader-readbook', bookId]);
   }
 
   cancelSubscription(subscriptionId: number){

@@ -17,14 +17,15 @@
             <tr *ngFor="let subscription of userSubscriptions">
                 <td>{{subscription.subscriptionId}}</td>
                 <td>{{subscription.bookTitle}}</td>
-                <td>{{subscription.subscriptionStatus}}</td>
+                <td *ngIf="subscription.subscriptionStatus=='A';else inactive">Active</td>
+                <ng-template #inactive>Inactive</ng-template>
                 <td>{{subscription.subscriptionDate}}</td>
                 <td><span>&#8377;</span>{{subscription.subscriptionPrice}}</td>
                 <!-- <td>
                     <button type="button" class="btn btn-info" (click)="goToUpdateOrderStatus(order.orderId, order.orderStatus)">Cancel</button>&nbsp;
                 </td> -->
                 <td>
-                    <button mat-raised-button color="primary" class="reader-buttons" (click)="readBook()">Read Book</button>&nbsp;
+                    <button mat-raised-button color="primary" class="reader-buttons" (click)="readBook(subscription.bookId)">Read Book</button>&nbsp;
                     <button mat-raised-button color="warn" class="reader-buttons" (click)="cancelSubscription(subscription.subscriptionId)">Unsubscribe</button>
                 </td>
             </tr>

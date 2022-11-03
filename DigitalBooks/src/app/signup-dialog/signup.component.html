@@ -13,20 +13,20 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
-      <input formControlName="username" matInput placeholder="Enter username">
+      <input formControlName="username" matInput placeholder="Enter username...">
       <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input formControlName="password" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Enter pasword">
+        <input formControlName="password" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Enter password...">
         <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-label>Confirm password</mat-label>
-        <input formControlName="confirmpassword" matInput [type]="showPassword ? 'text' : 'password'" placeholder="Enter pasword">
-        <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+        <input formControlName="confirmpassword" matInput [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm password...">
+        <mat-icon matSuffix (click)="toggleConfirmPasswordVisibility()">visibility</mat-icon>
     </mat-form-field>
 
     <h4>Select Account type:</h4>

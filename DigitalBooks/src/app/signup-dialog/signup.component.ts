@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
 
   user = new User();   // User signing up
   public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false;
   signupForm!:FormGroup;
   // form values
   firstname!: string;
@@ -29,7 +30,7 @@ export class SignupComponent implements OnInit {
     private router: Router, private dialogRef: MatDialogRef<SignupComponent>) { }
 
   ngOnInit(): void {
-
+    console.log("SignupComponent Initialized");console.log(this.firstname);
     this.signupForm = this.formBuilder.group({
       firstname:['',Validators.required],
       lastname:['',Validators.required],
@@ -51,8 +52,7 @@ export class SignupComponent implements OnInit {
     this.role = this.signupForm.get('role')?.value;
 
     console.log(this.firstname+this.lastname+this.username+
-      this.password+this.confirmpassword+this.role+this.firstname+this.lastname+
-      this.username +this.password +this.confirmpassword+this.role);
+      this.password+this.confirmpassword+this.role);
 
     if(this.firstname == undefined || this.lastname == undefined || this.username == undefined || 
       this.password == undefined || this.confirmpassword == undefined || this.role == undefined
@@ -61,7 +61,12 @@ export class SignupComponent implements OnInit {
         alert("Please provide all the details");
         //this.router.navigate(['signup']);
         // or
-        //this.matDialog.open(SignupComponent);
+        // this.matDialog.open(SignupComponent, {
+        //   data: {
+        //     dataKey: this.firstname
+        //   }
+        // });
+        this.matDialog.open(SignupComponent);
     }
     else{
       if(this.password == this.confirmpassword){
@@ -72,26 +77,26 @@ export class SignupComponent implements OnInit {
         this.user.userLastName = this.lastname;
         this.user.username = this.username;
         this.user.userPassword = this.password;
-        console.log(this.username + ", " + this.password + ", " + this.role);
-    //     this.userService.signup(this.user, roleId).subscribe(
-    //       data => {
-    //         console.log("Signing up user: ")
-    //         console.log(data);
-    //         this.user = data;
+        console.log(this.username + ", " + this.password + ", " + this.role + ", roleId" + roleId);
+        this.userService.signup(this.user, roleId).subscribe(
+          data => {
+            console.log("Signing up user: ")
+            console.log(data);
+            this.user = data;
             
-    //         // Extract user-role
-    //         const userRole = data.userRoles;
-    //         console.log(userRole);
-    //         //alert("User "+this.firstname +" signed up as " + userRole);
-    //         alert("User "+this.firstname +" signed up as " + userRole.toString().replace("[", "").replace("]","").replace("ROLE_","").toLowerCase());
-    //         this.router.navigate(['home']);
-    // },
-    //   error => {console.log("Error while logging in: ");
-    //   console.log(error);
-    //   alert("Incorrect username or password, please try again.")
-    //   this.matDialog.open(SignupComponent);
-    // }
-    // );
+            // Extract user-role
+            const userRole = data.userRoles;
+            console.log(userRole);
+            //alert("User "+this.firstname +" signed up as " + userRole);
+            alert("User "+this.firstname +" signed up as " + userRole.toString().replace("[", "").replace("]","").replace("ROLE_","").toLowerCase());
+            //this.router.navigate(['home']);
+    },
+      error => {console.log("Error while signing in: ");
+      console.log(error);
+      alert("Error occurred while signing up, please try again later.");
+      //this.matDialog.open(SignupComponent);
+    }
+    );
     }
     else{
       alert("Passwords do not match !");
@@ -108,6 +113,10 @@ export class SignupComponent implements OnInit {
 
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  public toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   exit(){

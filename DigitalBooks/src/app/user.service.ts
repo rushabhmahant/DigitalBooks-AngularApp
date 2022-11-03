@@ -24,7 +24,7 @@ export class UserService {
   }
 
   signup(user: User, roleId: number): Observable<User>{
-    return this.httpClient.post<User>("http://localhost:7001/userservice/signup/" + roleId, user)
+    return this.httpClient.post<User>("http://localhost:7001/api/v1/digitalbooks/userservice/signup/" + roleId, user)
   }
 
   //  Reader APIs
