@@ -1,1 +1,69 @@
-<p>author-addbook works!</p>
+<h1 mat-dialog-title>Create a Book</h1>
+<div mat-dialog-content>
+<form [formGroup]="bookForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Enter title...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <input formControlName="category" matInput placeholder="Enter category...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput placeholder="Enter price...">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Content</mat-label>
+        <input formControlName="content" matInput placeholder="Enter content...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Publisher</mat-label>
+        <input formControlName="publisher" matInput placeholder="Enter publisher...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Published Date</mat-label>
+        <input formControlName="publishedDate" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="container row">
+        <div class="col-md-12">
+            <h3>Upload Image</h3>
+        </div>
+    </div>
+
+    <div class="container row">
+        <div class="col-md-6">
+            <input type="file" (change)="onFileChanged($event)">
+        </div>
+        <div class="col-md-6">
+            <input type="button" (click)="onUpload" value="upload">
+        </div>
+    </div>
+
+    <!-- <h4>Select Account type:</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Account type</mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="reader">Reader</mat-option>
+            <mat-option value="author">Author</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+</form>
+
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close (click)="addBook()">Create</button>
+        <button style="margin-left: 10px;" mat-raised-button color="warn" (click)="goBack()" mat-dialog-close>Go Back</button>
+    </div>
+
+</div>
