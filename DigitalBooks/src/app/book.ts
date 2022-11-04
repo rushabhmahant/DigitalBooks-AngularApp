@@ -1,3 +1,5 @@
+import { Logo } from "./logo";
+
 export class Book {
 
     bookId!: number;
@@ -11,5 +13,9 @@ export class Book {
     bookPublisher!: string;
     bookPublishedDate!: Date;
     bookBlockedStatus!: string;
+
+    logo!: Logo;
+
+
 
 }

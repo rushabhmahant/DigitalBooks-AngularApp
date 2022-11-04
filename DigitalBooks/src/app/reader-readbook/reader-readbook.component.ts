@@ -13,6 +13,7 @@ export class ReaderReadbookComponent implements OnInit {
 
   bookId!: number;
   bookToRead = new Book();
+  
 
   constructor(private userService: UserService, private bookService: BookService,
     private activatedRoute: ActivatedRoute) { }

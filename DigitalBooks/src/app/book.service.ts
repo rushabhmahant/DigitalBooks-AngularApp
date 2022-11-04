@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from './book';
+import { Logo } from './logo';
 import { Subscription } from './subscription';
 
 @Injectable({
@@ -14,8 +15,8 @@ export class BookService {
   constructor(private httpClient: HttpClient) { }
 
   getAllBooks(): Observable<Book[]>{
-    // return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/books");
-    return this.httpClient.get<Book[]>("http://localhost:7001/api/v1/digitalbooks/userservice/author/getAllBooks");
+     return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/books");
+    //return this.httpClient.get<Book[]>("http://localhost:7001/api/v1/digitalbooks/userservice/author/getAllBooks");
   }
 
   getBookById(bookId: number): Observable<Book>{
@@ -52,9 +53,18 @@ export class BookService {
     return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/readers/" + userId);
   }
 
+  uploadLogo(userId: number, formData: FormData): Observable<Logo>{
+
+    return this.httpClient.post<Logo>("http://localhost:7002/logoservice/logo/", formData);
+  }
+
   //  Here, userId is the same as authorId in mS
-  createBook(userId: number, book: Book): Observable<Book>{
-    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/" +userId + "/books", book);
+  createBook(userId: number, book: Book, logoId: number): Observable<Book>{
+    let queryParams = new HttpParams();
+    if(logoId!=undefined && logoId>0){
+      queryParams = queryParams.append("logoId",logoId);
+    }
+    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/" +userId + "/books", book, {params: queryParams});
   }
 
   //  Here, userId is the same as authorId in mS
