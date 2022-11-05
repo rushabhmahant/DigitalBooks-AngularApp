@@ -1,1 +1,58 @@
-<p>author-updatebook works!</p>
+<h1 mat-dialog-title>Update Book {{book.bookTitle}}</h1>
+<div mat-dialog-content>
+<form class="example-form" [formGroup]="bookForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput [(ngModel)]="book.bookTitle" placeholder="Enter title...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <input formControlName="category" matInput [(ngModel)]="book.bookCategory" placeholder="Enter category...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Author</mat-label>
+        <input formControlName="author" matInput [(ngModel)]="book.bookAuthor" placeholder="Enter author name...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input formControlName="price" matInput [(ngModel)]="book.bookPrice" placeholder="Enter price...">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Publisher</mat-label>
+        <input formControlName="publisher" matInput [(ngModel)]="book.bookPublisher" placeholder="Enter publisher...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Published Date</mat-label>
+        <input formControlName="publishedDate" matInput [(ngModel)]="book.bookPublishedDate" [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+            <h3>Book Logo</h3>
+            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<input hidden (change)="onFileChanged($event)" #fileInput type="file">
+<span class="file-name">Update logo {{originalFileName}}</span>
+<span class="file-name" *ngIf="selectedFile"> to {{selectedFile?.name}}</span>
+
+    
+    <br/><br/>
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Content</mat-label>
+        <textarea formControlName="content" matInput [(ngModel)]="book.bookContent" placeholder="Enter content..."></textarea>
+    </mat-form-field>
+
+</form>
+
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="primary" mat-dialog-close (click)="updateBook()">Update</button>
+        <button style="margin-left: 10px;" mat-raised-button color="warn" (click)="goBack()" mat-dialog-close>Go Back</button>
+    </div>
+
+</div>

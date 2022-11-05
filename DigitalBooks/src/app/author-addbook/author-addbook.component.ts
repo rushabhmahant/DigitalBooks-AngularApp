@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Logo } from '../logo';
@@ -30,7 +31,8 @@ export class AuthorAddbookComponent implements OnInit {
   imagename!: string;
 
 
-  constructor(private formBuilder: FormBuilder, private bookService: BookService) { }
+  constructor(private formBuilder: FormBuilder, private bookService: BookService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.bookForm = this.formBuilder.group({
@@ -55,6 +57,7 @@ export class AuthorAddbookComponent implements OnInit {
     console.log("Uploading")
     console.log(this.selectedFile);
     //  send logoId as requestparam in service
+    if(this.selectedFile != null && this.selectedFile != undefined){
     const formData: FormData = new FormData();
 
     formData.append('logoFile', this.selectedFile, this.selectedFile.name);
@@ -68,6 +71,10 @@ export class AuthorAddbookComponent implements OnInit {
         this.createBook();
       }
     );
+    }
+    else{
+      this.createBook();
+    }
 
     
     
@@ -86,25 +93,24 @@ export class AuthorAddbookComponent implements OnInit {
     this.book.bookPublisher = this.bookForm.get('publisher')?.value;
     this.book.bookPublishedDate = this.bookForm.get('publishedDate')?.value;
 
-    if(this.logo != undefined){
       this.bookService.createBook(this.authorId, this.book, this.logo.logoId).subscribe(
         data => {
           console.log("Add book successful !");
           console.log(data);
+          alert("Book " + this.book.bookTitle + " created successfully !");
+          this.router.navigate(['author']);
         },
         error => {
           console.log("Add book Unsuccessful");
           console.log(error);
+          alert("Cannot create book, please try again later");
         }
       );
-      }else{
-        alert("Error while uploading logo, coudnt create book")
-      }
 
   }
 
   goBack(){
-
+    this.router.navigate(['author']);
   }
 
   onFileChanged(event: any){

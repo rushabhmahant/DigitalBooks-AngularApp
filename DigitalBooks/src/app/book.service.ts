@@ -72,8 +72,12 @@ export class BookService {
   }
 
   //  Here, userId is the same as authorId in mS
-  updateBook(userId: number, bookId: number, book: Book): Observable<Book>{
-    return this.httpClient.put<Book>("http://localhost:7002/bookservice/author/" + userId + "/books/" + bookId, book);
+  updateBook(userId: number, bookId: number, book: Book, logoId: number): Observable<Book>{
+    let queryParams = new HttpParams();
+    if(logoId!=undefined && logoId>0){
+      queryParams = queryParams.append("logoId",logoId);
+    }
+    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/" + userId + "/book/" + bookId, book, {params: queryParams});
   }
 
   setBookBlockedStatus(userId: number, bookId: number, bookBlockedtatus: string, book: Book): Observable<Book>{
@@ -83,8 +87,8 @@ export class BookService {
   }
 
   //  Here, userId is the same as authorId in mS
-  deleteBook(userId: number, bookId: Book): Observable<any>{
-    return this.httpClient.delete("http://localhost:7002/bookservice/author/delete/" + userId +"/" +bookId);
+  deleteBook(userId: number, book: Book): Observable<any>{
+    return this.httpClient.delete("http://localhost:7002/bookservice/author/delete/" + userId +"/" +book.bookId);
   }
 
 
