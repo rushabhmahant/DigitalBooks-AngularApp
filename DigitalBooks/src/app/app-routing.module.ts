@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'reader-subscriptions', component: ReaderSubscriptionsComponent},
   {path: 'reader-readbook/:bookId', component: ReaderReadbookComponent},
   {path: 'author-addbook', component: AuthorAddbookComponent},
+  {path: 'author-updatebook/:bookId', component: AuthorAddbookComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

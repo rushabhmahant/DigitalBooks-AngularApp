@@ -35,7 +35,8 @@ export class AuthorComponent implements OnInit {
   }
 
   updateBook(book: Book){
-
+    const bookId: number = book.bookId;
+    this.router.navigate(['author-updatebook', bookId]);
   }
 
   blockBook(book: Book){

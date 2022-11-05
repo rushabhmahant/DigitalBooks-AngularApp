@@ -5,6 +5,6 @@ export class Logo {
     logoId!: number;
     logoName!: string;
     logoType!: string;
-    logoBytes!: Byte[];
+    logoBytes!: any;
 
 }

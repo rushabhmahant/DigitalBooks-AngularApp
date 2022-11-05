@@ -30,6 +30,7 @@ import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subs
 import { SignupComponent } from './signup-dialog/signup.component';
 import { ReaderReadbookComponent } from './reader-readbook/reader-readbook.component';
 import { AuthorAddbookComponent } from './author-addbook/author-addbook.component';
+import { AuthorUpdatebookComponent } from './author-updatebook/author-updatebook.component';
 
 
 
@@ -43,7 +44,8 @@ import { AuthorAddbookComponent } from './author-addbook/author-addbook.componen
     ReaderSubscriptionsComponent,
     SignupComponent,
     ReaderReadbookComponent,
-    AuthorAddbookComponent
+    AuthorAddbookComponent,
+    AuthorUpdatebookComponent
   ],
   imports: [
     BrowserModule,

@@ -13,24 +13,26 @@
         <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
     </div>
     
-
+    <!-- <img [src]="retrievedLogo"> -->
 <div class="container" style="text-align: left;"> <p style="font-size: x-large;" class="font-weight-light">Explore the most popular list of available books:</p></div>
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">    
 
-
-    <div class="col mb-5" *ngFor="let book of books">
+            
+    <div class="col mb-5" *ngFor="let book of books;let indexOfBook=index;">
     <div class="card h-100">
         <!-- Blocked Status badge-->
         <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" *ngIf="book.bookBlockedStatus=='B'">Blocked</div>
         <!-- Book image-->
-        <img class="card-img-top" src="assets/bookstore.png" alt="..." />
+        <!-- <img class="card-img-top" src="assets/bookstore.png" alt="..." /> -->
+        <img [src]="book.logo ? logoMap.get(book.bookId) : 'assets/bookstore.png'">
+        <!-- <img [src]="retrievedLogo"> -->
         <!-- Book details-->
         <div class="card-body p-4">
             <div class="text-center">
-                <!-- Book name-->
+                <!-- Book name--><h5 class="fw-bolder">{{book.bookId}}-{{indexOfBook}}</h5>
                 <h5 class="fw-bolder">{{book.bookTitle}}</h5>
                 <!-- Book reviews-->
                 <div class="d-flex justify-content-center small text-warning mb-2">

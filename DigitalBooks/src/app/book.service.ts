@@ -53,6 +53,10 @@ export class BookService {
     return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/readers/" + userId);
   }
 
+  getLogoById(logoId: number): Observable<Logo>{
+    return this.httpClient.get<Logo>("http://localhost:7002/logoservice/logo/"+logoId);
+  }
+
   uploadLogo(userId: number, formData: FormData): Observable<Logo>{
 
     return this.httpClient.post<Logo>("http://localhost:7002/logoservice/logo/", formData);

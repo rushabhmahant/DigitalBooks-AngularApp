@@ -23,6 +23,11 @@ export class ReaderComponent implements OnInit {
   categorySearch!: string;
   authorSearch!: string;
   priceSearch!: number;
+  // For displaying logo
+  logoId!: number;
+  base64Data: any;
+  retrievedLogo: any;
+  logoMap = new Map();
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private bookService: BookService, private router: Router, private appComponent: AppComponent) {
@@ -45,12 +50,32 @@ export class ReaderComponent implements OnInit {
     })
 
     this.bookService.getAllBooks().subscribe(
-      data => this.books = data,
+      data => {this.books = data;
+        this.books.forEach(book => {
+          if(book.logo != null && book.logo != undefined){
+            console.log("Getting logo for "); console.log(book.bookId);
+            this.loadLogo(book.bookId, book.logo.logoId);
+          }
+          
+         });
+      },
       error => console.log("Error while fetching books for reader: " + error)
     );
 
     this.loadUserSubscriptions();
 
+  }
+
+  loadLogo(bookId: number, logoId: number){
+    this.bookService.getLogoById(logoId).subscribe(
+      data => {
+        console.log("Single Logo received");
+        console.log(data);
+        this.base64Data = data.logoBytes;
+        this.retrievedLogo = 'data:image/png;base64,' + this.base64Data;
+        this.logoMap.set(bookId, this.retrievedLogo);
+      }
+    );
   }
 
   loadUserSubscriptions(){
@@ -120,6 +145,7 @@ export class ReaderComponent implements OnInit {
 
   userSubscribedBooks(){
     //  Navigate to list of user subscribed books
+    this.router.navigate(['reader-subscriptions']);
   }
 
   userSubscriptions(){

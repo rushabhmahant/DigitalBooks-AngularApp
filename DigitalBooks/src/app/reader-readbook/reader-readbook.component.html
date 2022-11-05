@@ -1,26 +1,12 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <!-- <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="assets/bookstore.png" alt="..." /></div> -->
-
-            <!-- <div class="container row">
-                <div class="col-md-6">
-                    <input type="text" id="name" placeholder="image name" [(ngModel)]="logoName"
-                        name="name" />
-                </div>
-                <div class="col-md-6">
-                    <input type="button" (click)="getImage()" value="Get Image">
-            
-                </div>
-            </div> -->
             
             <!--    DISPLAY LOGO HERE   -->
             <div class="container row">
                 <div class="col-md-12">
-                    <!-- <h3>{{bookToRead.bookImageName}}</h3>
-                    <div *ngIf=retrievedImage>
-                        <img [src]="retrievedImage">
-                    </div> -->
+                    <!-- <h3>{{bookToRead.bookImageName}}</h3> -->
+                    <img [src]="bookToRead.logo ? logoMap.get(bookToRead.bookId) : 'assets/bookstore.png'">
                 </div>
             </div>
 
@@ -39,10 +25,13 @@
                         <i class="fa fa-star rating-color"></i>
                         <i class="fa fa-star"></i>
                     </div>
-                    <h5 class="review-count">12 Reviews</h5>
+                    
                 </div><p></p>
-                <p class="lead"><b>{{bookToRead.bookContent}}</b></p>
+                <h5 class="review-count">12 Reviews</h5>
+                <p></p>
+                
             </div>
+            <p class="lead"><b>{{bookToRead.bookContent}}</b></p>
         </div>
     </div>
 </section>
