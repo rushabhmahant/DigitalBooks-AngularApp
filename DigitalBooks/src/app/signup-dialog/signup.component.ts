@@ -92,7 +92,13 @@ export class SignupComponent implements OnInit {
     },
       error => {console.log("Error while signing in: ");
       console.log(error);
+      console.log(error.error.errorCode);
+      if(error.error!=undefined && error.error.errorCode!=null && error.error.errorCode == 609){
+        alert("Username already in use, please try a different username");
+      }
+      else{
       alert("Error occurred while signing up, please try again later.");
+      }
     }
     );
     }
