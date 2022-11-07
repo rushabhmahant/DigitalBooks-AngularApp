@@ -1,11 +1,16 @@
-<h1 mat-dialog-title>Create a Book</h1>
-<div mat-dialog-content>
+<div class="container col-md-5" style="margin-top: 25px;margin-bottom: 25px;">
+    
+    <div class="text-center" style="margin-bottom: 20px;">
+        <h1 style="color: blueviolet;font-size: xx-large;" mat-dialog-title>Create a Book</h1>
+    </div>
+
+<!-- <div mat-dialog-content> -->
 <form class="example-form" [formGroup]="bookForm">
     <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
         <input formControlName="title" matInput placeholder="Enter title...">
     </mat-form-field>
-
+    &nbsp;
     <mat-form-field appearance="outline">
         <mat-label>Category</mat-label>
         <input formControlName="category" matInput placeholder="Enter category...">
@@ -13,9 +18,9 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Author</mat-label>
-        <input formControlName="author" matInput placeholder="Enter author name...">
+        <input formControlName="author" matInput [(ngModel)]="author" placeholder="Enter author name...">
     </mat-form-field>
-
+    &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Price</mat-label>
       <input formControlName="price" matInput placeholder="Enter price...">
@@ -26,7 +31,7 @@
         <mat-label>Publisher</mat-label>
         <input formControlName="publisher" matInput placeholder="Enter publisher...">
     </mat-form-field>
-
+    &nbsp;
     <mat-form-field appearance="outline">
         <mat-label>Published Date</mat-label>
         <input formControlName="publishedDate" matInput [matDatepicker]="picker">
@@ -34,55 +39,27 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
-    <!-- Upload logo section -->
-    <!-- <mat-form-field appearance="outline"> -->
-            <h3>Upload Image</h3>
-            <!-- <input type="file" formControlName="selectedFile" (change)="onFileChanged($event)">
-            <input type="button" (click)="onUpload()" value="upload"> -->
-            <!-- <div *ngIf="message">{{message}}</div> -->
-            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-<input hidden (change)="onFileChanged($event)" #fileInput type="file">
-<span class="file-name">{{selectedFile?.name}}</span>
-    <!-- </mat-form-field> -->
-
-    <!-- Below is for retrieving image from backend-->
-    <!-- <div class="container row">
-        <div class="col-md-6">
-            <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imagename">
-        </div>
-        <div class="col-md-6">
-            <input type="button" (click)="getImage()" value="Get Image">
-        </div>
-    </div>
-    <div class="container row">
-        <div class="col-md-12">
-            <img [src]="retrievedImage">
-        </div>
-    </div> -->
-    <!-- Till here -->
-
-    <!-- <h4>Select Account type:</h4>
-    <mat-form-field appearance="fill">
-        <mat-label>Account type</mat-label>
-        <mat-select formControlName="role">
-            <mat-option value="reader">Reader</mat-option>
-            <mat-option value="author">Author</mat-option>
-        </mat-select>
-    </mat-form-field> -->
-
-    
-
+    &nbsp;
     <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Content</mat-label>
         <textarea formControlName="content" matInput placeholder="Enter content..."></textarea>
     </mat-form-field>
-
+    <br/>
+    <!-- Upload logo section -->
+            <h3>Upload Image</h3>
+            <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose File</button>
+            <input hidden (change)="onFileChanged($event)" #fileInput type="file">
+            <span class="file-name">{{selectedFile?.name}}</span>
+            &nbsp;
+    
 </form>
-
-    <div mat-dialog-action [align]="'end'">
+</div>
+    
+    <div mat-dialog-action [align]="'center'" style="margin-bottom: 40px;">
+        &nbsp;<br/>
         <button mat-raised-button color="primary" mat-dialog-close (click)="addBook()">Create</button>
         <button style="margin-left: 10px;" mat-raised-button color="warn" (click)="goBack()" mat-dialog-close>Go Back</button>
     </div>
 
-</div>
+<!-- </div> -->
+

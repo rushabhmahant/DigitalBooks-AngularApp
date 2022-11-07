@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { UserService } from '../user.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-author',
@@ -94,7 +95,7 @@ export class AuthorComponent implements OnInit {
 
   deleteBook(book: Book){
     // For book having logo,  Delete the logo first (maybe in mS)
-    if(confirm("Are you sure you want to delete book " + book.bookTitle)){
+    if(confirm("Are you sure you want to delete book " + book.bookTitle + " ?")){
     this.bookService.deleteBook(this.userId, book).subscribe(
       data => {
         alert("Book " + book.bookTitle + " deleted successfully");
@@ -106,6 +107,13 @@ export class AuthorComponent implements OnInit {
       }
     );
   }
+}
+
+@HostListener('window:popstate', ['$event'])
+onBrowserBackBtnClose(event: Event) {
+    console.log('back button pressed');
+    event.preventDefault(); 
+    this.appComponent.goToHomePage();
 }
 
 }

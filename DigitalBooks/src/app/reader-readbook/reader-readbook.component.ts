@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { UserService } from '../user.service';
+//import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-reader-readbook',
@@ -21,7 +23,13 @@ export class ReaderReadbookComponent implements OnInit {
   
 
   constructor(private userService: UserService, private bookService: BookService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute, private appComponent: AppComponent) {
+      console.log("Inside reader-readbook component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+     }
 
   ngOnInit(): void {
 
@@ -57,5 +65,12 @@ export class ReaderReadbookComponent implements OnInit {
       }
     );
   }
+
+//   @HostListener('window:popstate', ['$event'])
+// onBrowserBackBtnClose(event: Event) {
+//     console.log('back button pressed');
+//     event.preventDefault(); 
+//     this.appComponent.goToHomePage();
+// }
 
 }

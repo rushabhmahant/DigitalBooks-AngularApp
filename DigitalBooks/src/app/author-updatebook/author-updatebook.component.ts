@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Logo } from '../logo';
@@ -30,7 +31,13 @@ export class AuthorUpdatebookComponent implements OnInit {
   logo: Logo = new Logo();
 
   constructor(private activatedRoute: ActivatedRoute, private bookService: BookService,
-    private formBuilder: FormBuilder, private router: Router) { }
+    private formBuilder: FormBuilder, private router: Router, private appComponent: AppComponent) {
+      console.log("Inside author-updatebook component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+     }
 
   ngOnInit(): void {
 
@@ -79,6 +86,20 @@ export class AuthorUpdatebookComponent implements OnInit {
     this.book.bookPublisher = this.bookForm.get('publisher')?.value;
     this.book.bookPublishedDate = this.bookForm.get('publishedDate')?.value;
 
+    if(this.book.bookTitle == undefined || this.book.bookCategory == undefined || this.book.bookPrice == undefined || 
+      this.book.bookContent == undefined || this.book.bookPublisher == undefined || this.book.bookPublishedDate == undefined
+      || this.book.bookTitle == "" || this.book.bookCategory == "" || this.book.bookPrice == null || 
+      this.book.bookContent == "" || this.book.bookPublisher == "" || this.book.bookPublishedDate.toString() == ""){
+        alert("Please provide all the details. Image upload can be skipped");
+      
+    }
+    else{
+      console.log(isNaN(Number(this.book.bookPrice)));
+      if(isNaN(Number(this.book.bookPrice))){
+        alert("Please provide valid inputs");
+      }
+      else{
+        console.log(this.book.bookPublishedDate);
     if(this.selectedFile != null && this.selectedFile != undefined){
       this.updateBookWithLogo();
     }else{
@@ -95,7 +116,10 @@ export class AuthorUpdatebookComponent implements OnInit {
       );
 
     }
+    }
   }
+
+  } // updateBook() ends here
 
   updateBookWithLogo(){
     console.log("Uploading logo " + this.selectedFile.name)
@@ -127,18 +151,21 @@ export class AuthorUpdatebookComponent implements OnInit {
   }
 
   goBack(){
-
+    this.router.navigate(['author']);
   }
 
   onFileChanged(event: any){
     console.log("onFileChanged() called...");
     const file = event.target.files[0];
     console.log(file);
-    
-    //this.bookForm.get('selectedFile')?.setValue(file);
+    console.log(file.size);
+    if(file.size>51200){  // 153600 for 150kb, 51200 for 50 kb
+      alert("Image size is too large. Please ensure image size is less than 50kb");
+    }else{
     this.selectedFile = file;
     console.log(this.selectedFile);
     console.log(this.selectedFile.name);
+    }
   }
 
 }

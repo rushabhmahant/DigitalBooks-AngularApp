@@ -46,7 +46,8 @@ export class ReaderComponent implements OnInit {
       title:[''],
       category:[''],
       author:[''],
-      price:['', Validators.pattern(/^[0-9]\d*$/)],
+      //  price:['', Validators.pattern(/^[0-9]\d*$/)], --> Becomes red with decimal values
+      price:['']
     })
 
     this.bookService.getAllBooks().subscribe(

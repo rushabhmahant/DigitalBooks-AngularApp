@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Logo } from '../logo';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-author-addbook',
@@ -32,9 +34,22 @@ export class AuthorAddbookComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private bookService: BookService,
-    private router: Router) { }
+    private userService: UserService, private router: Router, private appComponent: AppComponent) {
+      console.log("Inside author-addbook component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+     }
 
   ngOnInit(): void {
+
+    this.userService.getUserById(this.authorId).subscribe(
+      data => {
+        this.author = data.userFirstName + " " + data.userLastName;
+      }
+    );
+
     this.bookForm = this.formBuilder.group({
       title:['',Validators.required],
       category: ['',Validators.required],
@@ -92,7 +107,21 @@ export class AuthorAddbookComponent implements OnInit {
     this.book.bookLogo = "/path/to/logo";
     this.book.bookPublisher = this.bookForm.get('publisher')?.value;
     this.book.bookPublishedDate = this.bookForm.get('publishedDate')?.value;
+    console.log(this.book.bookPublishedDate);
 
+    if(this.book.bookTitle == undefined || this.book.bookCategory == undefined || this.book.bookPrice == undefined || 
+      this.book.bookContent == undefined || this.book.bookPublisher == undefined || this.book.bookPublishedDate == undefined
+      || this.book.bookTitle == "" || this.book.bookCategory == "" || this.book.bookPrice == null || 
+      this.book.bookContent == "" || this.book.bookPublisher == "" || this.book.bookPublishedDate.toString() == ""){
+        alert("Please provide all the details. Image upload can be skipped");
+      
+    }
+    else{
+      console.log(isNaN(Number(this.book.bookPrice)));
+      if(isNaN(Number(this.book.bookPrice))){
+        alert("Please provide valid inputs");
+      }
+      else{
       this.bookService.createBook(this.authorId, this.book, this.logo.logoId).subscribe(
         data => {
           console.log("Add book successful !");
@@ -106,7 +135,9 @@ export class AuthorAddbookComponent implements OnInit {
           alert("Cannot create book, please try again later");
         }
       );
-
+      }
+      
+    }
   }
 
   goBack(){
@@ -115,13 +146,20 @@ export class AuthorAddbookComponent implements OnInit {
 
   onFileChanged(event: any){
     console.log("onFileChanged() called...");
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
     console.log(file);
-    
-    //this.bookForm.get('selectedFile')?.setValue(file);
-    this.selectedFile = file;
+
+    console.log(file.size);
+    if(file.size>51200){  // 153600 for 150kb, 51200 for 50 kb 
+      alert("Image size is too large. Please ensure image size is less than 50kb");
+    }
+    else{
+      this.selectedFile = file;
+      
     console.log(this.selectedFile);
     console.log(this.selectedFile.name);
+    }
+    
   }
 
   onUpload(){

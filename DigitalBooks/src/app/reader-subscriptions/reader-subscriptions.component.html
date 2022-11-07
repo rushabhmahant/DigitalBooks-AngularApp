@@ -2,10 +2,10 @@
 <div style="margin-top: 20px;margin-bottom: 20px;">
     <h2 class="text-center" style="color: brown;">Welcome {{userDisplayName}}, Checkout your subscriptions :</h2>
     <div class="container">
-       <h5 *ngIf="userSubscriptions.length==0" style="color: red">Sorry, {{userDisplayName}}, you have no orders!</h5>
+       <h3 *ngIf="userSubscriptions==null || userSubscriptions.length==0" style="color: red">Sorry, {{userDisplayName}}, you have no subscriptions!</h3>
     <table class="table table-striped">
         <thead>
-            <tr *ngIf="userSubscriptions.length>0">
+            <tr *ngIf="userSubscriptions!=null && userSubscriptions.length>0">
                 <th>Subscription No.</th>
                 <th>Book Title</th>
                 <th>Status</th>
@@ -26,7 +26,7 @@
                 </td> -->
                 <td>
                     <button mat-raised-button color="primary" class="reader-buttons" (click)="readBook(subscription.bookId)" [disabled]="subscription.subscriptionStatus=='I'">Read Book</button>&nbsp;
-                    <button mat-raised-button color="warn" class="reader-buttons" (click)="cancelSubscription(subscription.subscriptionId)">Unsubscribe</button>
+                    <button mat-raised-button color="warn" class="reader-buttons" (click)="cancelSubscription(subscription)" [disabled]="!checkSubscribedDate(subscription.subscriptionDate)">Unsubscribe</button>
                 </td>
             </tr>
         </tbody>

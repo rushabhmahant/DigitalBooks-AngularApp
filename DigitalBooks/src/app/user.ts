@@ -5,7 +5,7 @@ export class User {
 	userPassword!: string;
 	userFirstName!: string;
 	userLastName!: string;
-    userRoles!: object[];
+    userRoles!: Role[];
 	
 	enabled!: boolean;
 	password!: string;
@@ -15,4 +15,9 @@ export class User {
 	accountNonLocked!: boolean
 
 
+}
+
+export class Role {
+	roleId!: number;
+	roleName!: string; 
 }

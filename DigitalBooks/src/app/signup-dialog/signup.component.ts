@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
         //     dataKey: this.firstname
         //   }
         // });
-        this.matDialog.open(SignupComponent);
+        //this.matDialog.open(SignupComponent);
     }
     else{
       if(this.password == this.confirmpassword){
@@ -85,16 +85,14 @@ export class SignupComponent implements OnInit {
             this.user = data;
             
             // Extract user-role
-            const userRole = data.userRoles;
+            const userRole = data.userRoles[0].roleName;
             console.log(userRole);
-            //alert("User "+this.firstname +" signed up as " + userRole);
             alert("User "+this.firstname +" signed up as " + userRole.toString().replace("[", "").replace("]","").replace("ROLE_","").toLowerCase());
-            //this.router.navigate(['home']);
+            this.matDialog.closeAll();
     },
       error => {console.log("Error while signing in: ");
       console.log(error);
       alert("Error occurred while signing up, please try again later.");
-      //this.matDialog.open(SignupComponent);
     }
     );
     }

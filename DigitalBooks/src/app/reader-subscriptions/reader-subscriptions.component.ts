@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 import { Book } from '../book';
 import { BookService } from '../book.service';
 import { Subscription } from '../subscription';
@@ -20,12 +21,22 @@ export class ReaderSubscriptionsComponent implements OnInit {
   userSubscriptionsTemplate!: UserSubscriptionsTemplate;
 
   constructor(private userService: UserService, private bookService: BookService,
-    private router: Router) { }
+    private router: Router, private appComponent: AppComponent) {
+      console.log("Inside reader-subscriptions component constructor");
+    this.appComponent.showHomeBtn(true);
+    this.appComponent.showLoginBtn(false);
+    this.appComponent.showSignupBtn(false);
+    this.appComponent.showLogoutBtn(true);
+     }
 
   ngOnInit(): void {
 
     this.userId = Number(sessionStorage.getItem('userId'));
     
+    this.loadSubscriptions();
+  }
+
+  loadSubscriptions(){
     this.userService.getUserSubscriptions(this.userId).subscribe(
       data => {
         this.userSubscriptionsTemplate = data;
@@ -42,8 +53,34 @@ export class ReaderSubscriptionsComponent implements OnInit {
     this.router.navigate(['reader-readbook', bookId]);
   }
 
-  cancelSubscription(subscriptionId: number){
+  checkSubscribedDate(subscriptionDate: Date){
+    const now = new Date();
+    const subDate = new Date(subscriptionDate);
+    //console.log(now.getDate() - subDate.getDate());
+    console.log(now.getDate());
+    console.log(subDate.getDate())
+    if(now.getDate() - subDate.getDate() <=1){
+      return true;
+    }
+    return false;
+  }
 
+  cancelSubscription(subscription: Subscription){
+
+    if(confirm("Cancel subscription for " + subscription.bookTitle + "?")){
+      this.userService.removeSubscription(this.userId, subscription.subscriptionId).subscribe(
+        data => {
+          console.log("Subscription cancelled");
+          this.loadSubscriptions();
+        },
+        error => {
+          alert("Error occurred while cancelling subscription, please try again later");
+          console.log(error);
+        }
+      );
+
+    }
+    
   }
 
 

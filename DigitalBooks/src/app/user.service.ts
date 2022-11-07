@@ -11,30 +11,34 @@ import { User } from './user';
 })
 export class UserService {
 
-  private baseUrl = "http://localhost:9191/userservice"
+  private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
 
   constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>("http://localhost:9191/userservice/users");
+    return this.httpClient.get<User[]>(this.baseUrl+"/users");
   }
 
   getUserById(userId: number): Observable<User>{
-    return this.httpClient.get<User>("http://localhost:9191/userservice/user/" + userId);
+    return this.httpClient.get<User>(this.baseUrl+"/user/" + userId);
   }
 
   signup(user: User, roleId: number): Observable<User>{
-    return this.httpClient.post<User>("http://localhost:7001/api/v1/digitalbooks/userservice/signup/" + roleId, user)
+    return this.httpClient.post<User>(this.baseUrl+"/signup/" + roleId, user)
   }
 
   //  Reader APIs
 
   getUserSubscriptions(userId: number): Observable<UserSubscriptionsTemplate>{
-    return this.httpClient.get<UserSubscriptionsTemplate>("http://localhost:7001/api/v1/digitalbooks/userservice/readers/"+userId+"/subscriptions");
+    return this.httpClient.get<UserSubscriptionsTemplate>(this.baseUrl+"/readers/"+userId+"/subscriptions");
   }
 
   addSubscription(userId: number, bookId: number): Observable<Subscription>{
-    return this.httpClient.post<Subscription>("http://localhost:7001/api/v1/digitalbooks/userservice/readers/" + userId + "/subscribe/" + bookId, {});
+    return this.httpClient.post<Subscription>(this.baseUrl+"/readers/" + userId + "/subscribe/" + bookId, {});
+  }
+
+  removeSubscription(userId: number, subscriptionId: number): Observable<Object>{
+    return this.httpClient.delete<Object>(this.baseUrl + "/readers/"+userId + "/removesubscription/" + subscriptionId)
   }
   
 
