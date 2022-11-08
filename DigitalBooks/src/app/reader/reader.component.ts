@@ -133,7 +133,7 @@ export class ReaderComponent implements OnInit {
         data => {
           console.log("Adding subscription...");
           alert("Subscription added successfully. \nSubscription Id: " 
-            + data.subscriptionId + " \nSubscription Price: " + data.subscriptionPrice);
+            + data.subscriptionId + " \nSubscription Price: &#8377;" + data.subscriptionPrice);
           this._userSubscribedBooks.push(data.bookId);
         },
         error => {

@@ -11,8 +11,8 @@ import { User } from './user';
 })
 export class UserService {
 
+  //private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice"
   private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
-
   constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<User[]>{
@@ -47,7 +47,7 @@ export class UserService {
   setBookBlockedStatus(userId: number, bookId: number, bookBlockedtatus: string, book: Book): Observable<Book>{
     let queryParams = new HttpParams();
     queryParams = queryParams.append("block",bookBlockedtatus);
-    return this.httpClient.post<Book>("http://localhost:7001/api/v1/digitalbooks/userservice/author/"+ userId +"/books/"+bookId, book, {params: queryParams});
+    return this.httpClient.post<Book>(this.baseUrl+"/author/"+ userId +"/books/"+bookId, book, {params: queryParams});
   }
 
 }

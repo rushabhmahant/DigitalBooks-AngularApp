@@ -98,6 +98,7 @@ export class AuthorAddbookComponent implements OnInit {
 
   createBook(){
 
+    //  Make sure these validations are done in addBook() itself to avoid uploading logoif a field is blank!
     this.book.authorId = this.authorId;
     this.book.bookTitle = this.bookForm.get('title')?.value;
     this.book.bookCategory = this.bookForm.get('category')?.value;

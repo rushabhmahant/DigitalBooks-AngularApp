@@ -10,17 +10,21 @@ import { Subscription } from './subscription';
 })
 export class BookService {
 
-  private baseUrl = "http://localhost:9191/bookservice"
+  //private baseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/bookservice"
+  //private logoBaseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/logoservice";
+
+  private baseUrl = "http://localhost:7002/bookservice"
+  private logoBaseUrl = "http://localhost:7002/logoservice"
 
   constructor(private httpClient: HttpClient) { }
 
   getAllBooks(): Observable<Book[]>{
-     return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/books");
+     return this.httpClient.get<Book[]>(this.baseUrl+"/books");
     //return this.httpClient.get<Book[]>("http://localhost:7001/api/v1/digitalbooks/userservice/author/getAllBooks");
   }
 
   getBookById(bookId: number): Observable<Book>{
-    return this.httpClient.get<Book>("http://localhost:7002/bookservice/book/" + bookId);
+    return this.httpClient.get<Book>(this.baseUrl+"/book/" + bookId);
   }
 
   searchBook(bookTitle: string, bookCategory: string, bookAuthor: string, bookPrice: number): Observable<Book[]>{
@@ -46,20 +50,20 @@ export class BookService {
     queryParams = queryParams.append("price",bookPrice);
     console.log("(Else)Searching for title: "+bookTitle+", category: "+bookCategory+", author: "+bookAuthor+", price: "+bookPrice);
     }
-    return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/search", {params: queryParams});
+    return this.httpClient.get<Book[]>(this.baseUrl+"/search", {params: queryParams});
   }
 
   getUserSubscribedBooks(userId: number): Observable<Book[]>{
-    return this.httpClient.get<Book[]>("http://localhost:7002/bookservice/readers/" + userId);
+    return this.httpClient.get<Book[]>(this.baseUrl+"/readers/" + userId);
   }
 
   getLogoById(logoId: number): Observable<Logo>{
-    return this.httpClient.get<Logo>("http://localhost:7002/logoservice/logo/"+logoId);
+    return this.httpClient.get<Logo>(this.logoBaseUrl+"/logo/"+logoId);
   }
 
   uploadLogo(userId: number, formData: FormData): Observable<Logo>{
 
-    return this.httpClient.post<Logo>("http://localhost:7002/logoservice/logo/", formData);
+    return this.httpClient.post<Logo>(this.logoBaseUrl+"/logo/", formData);
   }
 
   //  Here, userId is the same as authorId in mS
@@ -68,7 +72,7 @@ export class BookService {
     if(logoId!=undefined && logoId>0){
       queryParams = queryParams.append("logoId",logoId);
     }
-    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/" +userId + "/books", book, {params: queryParams});
+    return this.httpClient.post<Book>(this.baseUrl+"/author/" +userId + "/books", book, {params: queryParams});
   }
 
   //  Here, userId is the same as authorId in mS
@@ -77,25 +81,18 @@ export class BookService {
     if(logoId!=undefined && logoId>0){
       queryParams = queryParams.append("logoId",logoId);
     }
-    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/" + userId + "/book/" + bookId, book, {params: queryParams});
+    return this.httpClient.post<Book>(this.baseUrl+"/author/" + userId + "/book/" + bookId, book, {params: queryParams});
   }
 
   setBookBlockedStatus(userId: number, bookId: number, bookBlockedtatus: string, book: Book): Observable<Book>{
     let queryParams = new HttpParams();
     queryParams = queryParams.append("status",bookBlockedtatus);
-    return this.httpClient.post<Book>("http://localhost:7002/bookservice/author/"+ userId +"/books/ "+bookId, book, {params: queryParams});
+    return this.httpClient.post<Book>(this.baseUrl+"/author/"+ userId +"/books/ "+bookId, book, {params: queryParams});
   }
 
   //  Here, userId is the same as authorId in mS
   deleteBook(userId: number, book: Book): Observable<any>{
-    return this.httpClient.delete("http://localhost:7002/bookservice/author/delete/" + userId +"/" +book.bookId);
-  }
-
-
-  //  Subscription services
-
-  addSubscription(userId: number, bookId: number): Observable<Subscription>{
-    return this.httpClient.post<Subscription>("http://localhost:7001/userservice/readers/" + userId + "/subscribe/" + bookId, {});
+    return this.httpClient.delete(this.baseUrl+"/author/delete/" + userId +"/" +book.bookId);
   }
 
 

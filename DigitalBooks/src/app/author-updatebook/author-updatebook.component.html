@@ -42,7 +42,7 @@
     &nbsp;
     <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Content</mat-label>
-        <textarea formControlName="content" matInput [(ngModel)]="book.bookContent" placeholder="Enter content..."></textarea>
+        <textarea formControlName="content" rows="5" matInput [(ngModel)]="book.bookContent" placeholder="Enter content..."></textarea>
     </mat-form-field>
     <br/>
 
@@ -50,7 +50,8 @@
             <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose File</button>
 <input hidden (change)="onFileChanged($event)" #fileInput type="file">
 <span class="file-name">     Update logo {{originalFileName}}</span>
-<span class="file-name" *ngIf="selectedFile"> to {{selectedFile?.name}}</span>
+<span class="file-name" *ngIf="selectedFile"> to {{selectedFile?.name}}</span><br/>
+<h4 style="color: orange;">File size should not exceed 50kb</h4>
 &nbsp;
     
     

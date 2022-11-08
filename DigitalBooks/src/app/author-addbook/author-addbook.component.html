@@ -42,14 +42,15 @@
     &nbsp;
     <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Content</mat-label>
-        <textarea formControlName="content" matInput placeholder="Enter content..."></textarea>
+        <textarea formControlName="content" rows="5" matInput placeholder="Enter content..."></textarea>
     </mat-form-field>
     <br/>
     <!-- Upload logo section -->
             <h3>Upload Image</h3>
             <button type="button" color="accent" mat-raised-button (click)="fileInput.click()">Choose File</button>
             <input hidden (change)="onFileChanged($event)" #fileInput type="file">
-            <span class="file-name">{{selectedFile?.name}}</span>
+            <span class="file-name">{{selectedFile?.name}}</span><br/>
+            <h4 style="color: orange;">File size should not exceed 50kb</h4>
             &nbsp;
     
 </form>

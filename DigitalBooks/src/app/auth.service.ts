@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private baseUrl = "http://localhost:9191/api/v1/digitalbooks/userservice";
+  //private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice";
+  private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
   authRequest = new AuthRequest();
 
   constructor(private httpClient: HttpClient) { }
@@ -18,7 +19,7 @@ export class AuthService {
     this.authRequest.username = username;
     this.authRequest.password = password;
     console.log("username and password: " + this.authRequest.username + ", " + this.authRequest.password);
-    return this.httpClient.post<AuthResponse>("http://localhost:7001/api/v1/digitalbooks/userservice/authenticate", 
+    return this.httpClient.post<AuthResponse>(this.baseUrl+"/authenticate", 
     this.authRequest).pipe(
       map(
         authResponse => {
