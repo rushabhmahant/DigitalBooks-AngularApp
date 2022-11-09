@@ -5,6 +5,7 @@ import { AuthorUpdatebookComponent } from './author-updatebook/author-updatebook
 import { AuthorComponent } from './author/author.component';
 import { HomeComponent } from './home/home.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { ReaderBooksComponent } from './reader-books/reader-books.component';
 import { ReaderReadbookComponent } from './reader-readbook/reader-readbook.component';
 import { ReaderSubscriptionsComponent } from './reader-subscriptions/reader-subscriptions.component';
 import { ReaderComponent } from './reader/reader.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'reader', component: ReaderComponent},
   {path: 'author', component: AuthorComponent},
+  {path: 'reader-books', component: ReaderBooksComponent},
   {path: 'reader-subscriptions', component: ReaderSubscriptionsComponent},
   {path: 'reader-readbook/:bookId', component: ReaderReadbookComponent},
   {path: 'author-addbook', component: AuthorAddbookComponent},

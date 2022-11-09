@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from './book';
+import { UserSubscribedBooksTemplate } from './reader-books/reader-books.component';
 import { UserSubscriptionsTemplate } from './reader-subscriptions/reader-subscriptions.component';
 import { Subscription } from './subscription';
 import { User } from './user';
@@ -39,6 +40,10 @@ export class UserService {
 
   removeSubscription(userId: number, subscriptionId: number): Observable<Object>{
     return this.httpClient.delete<Object>(this.baseUrl + "/readers/"+userId + "/removesubscription/" + subscriptionId)
+  }
+
+  getUserSubscribedBooks(userId: number): Observable<UserSubscribedBooksTemplate>{
+    return this.httpClient.get<UserSubscribedBooksTemplate>(this.baseUrl + "/readers/"+userId + "/books");
   }
   
 

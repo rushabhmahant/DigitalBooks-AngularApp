@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { UserService } from '../user.service';
 import { Subscription } from '../subscription';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReaderBooksComponent } from '../reader-books/reader-books.component';
 
 @Component({
   selector: 'app-reader',
@@ -29,7 +31,7 @@ export class ReaderComponent implements OnInit {
   retrievedLogo: any;
   logoMap = new Map();
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService,
+  constructor(private formBuilder: FormBuilder, public matDialog: MatDialog, private userService: UserService,
     private bookService: BookService, private router: Router, private appComponent: AppComponent) {
       console.log("Inside reader component constructor");
     this.appComponent.showHomeBtn(true);
@@ -133,7 +135,7 @@ export class ReaderComponent implements OnInit {
         data => {
           console.log("Adding subscription...");
           alert("Subscription added successfully. \nSubscription Id: " 
-            + data.subscriptionId + " \nSubscription Price: &#8377;" + data.subscriptionPrice);
+            + data.subscriptionId + " \nSubscription Price: Rs. " + data.subscriptionPrice);
           this._userSubscribedBooks.push(data.bookId);
         },
         error => {
@@ -146,7 +148,24 @@ export class ReaderComponent implements OnInit {
 
   userSubscribedBooks(){
     //  Navigate to list of user subscribed books
-    this.router.navigate(['reader-subscriptions']);
+    //this.router.navigate(['reader-subscriptions']);
+
+    if(this._userSubscribedBooks.length == 0){
+      // chk this has user subscriptions
+      alert("You dont have any subscriptions, please subscribe a book to read it");
+    }
+    else{
+    const readerBooksDialogConfig = new MatDialogConfig();
+    readerBooksDialogConfig.autoFocus = true;
+
+    const signupDialogRef = this.matDialog.open(ReaderBooksComponent, readerBooksDialogConfig);
+
+    signupDialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // this.showLoginButton = result;
+      // this.showSignupButton = result;
+    });
+    }
   }
 
   userSubscriptions(){

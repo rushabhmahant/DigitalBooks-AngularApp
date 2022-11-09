@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Books you've got to read</h1>
+<div mat-dialog-content>
+<form [formGroup]="selectBookForm">
+    <h4>Select Book</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Select a book to read</mat-label>
+        <mat-select formControlName="book">
+            <!-- <mat-option value="book.bookId">{{book.bookTitle}}</mat-option> -->
+            <mat-option value="">Select a book</mat-option>
+            <mat-option *ngFor='let book of userSubscribedBooks' [value]="book">
+                {{book.bookTitle}}
+            </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="checkSizeOfSubscribedBooks()" style="color: red;">It seems all your books are blocked!</mat-hint><br/>
+    </mat-form-field>
+    <p></p>
+    <!-- <span ngIf="checkSizeOfSubscribedBooks()"><h5 style="color: red;">It seems all your books are blocked!</h5></span> -->
+
+</form>
+
+    <div mat-dialog-action [align]="'end'">
+        <!-- [disabled]="formisvalid"  -->
+        <button mat-raised-button color="primary" (click)="readBook()" [disabled]="checkSizeOfSubscribedBooks()">Read</button>
+        <button style="margin-left: 10px;" mat-raised-button color="warn" (click)="exit()" mat-dialog-close>Go Back</button>
+    </div>
+
+</div>
