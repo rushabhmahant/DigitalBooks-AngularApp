@@ -10,11 +10,11 @@ import { Subscription } from './subscription';
 })
 export class BookService {
 
-  //private baseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/bookservice"
-  //private logoBaseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/logoservice";
+  private baseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/bookservice"
+  private logoBaseUrl = "http://Digitalbooksbookservice-env.eba-w4wsiyef.ap-northeast-1.elasticbeanstalk.com/logoservice";
 
-  private baseUrl = "http://localhost:7002/bookservice"
-  private logoBaseUrl = "http://localhost:7002/logoservice"
+  //private baseUrl = "http://localhost:7002/bookservice"
+  //private logoBaseUrl = "http://localhost:7002/logoservice"
 
   constructor(private httpClient: HttpClient) { }
 

@@ -12,8 +12,8 @@ import { User } from './user';
 })
 export class UserService {
 
-  //private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice"
-  private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
+  private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice"
+  //private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
   constructor(private httpClient: HttpClient) { }
 
   getAllUsers(): Observable<User[]>{

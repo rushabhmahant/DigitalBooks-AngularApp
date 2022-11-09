@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  //private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice";
-  private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
+  private baseUrl = "http://Digitalbooksuserservice-env.eba-f5cp5wvg.ap-northeast-1.elasticbeanstalk.com/api/v1/digitalbooks/userservice";
+  //private baseUrl = "http://localhost:7001/api/v1/digitalbooks/userservice"
   authRequest = new AuthRequest();
 
   constructor(private httpClient: HttpClient) { }
